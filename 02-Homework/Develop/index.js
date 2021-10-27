@@ -1,62 +1,54 @@
 // TODO: Include packages needed for this application
 var inquirer= require('inquirer')
-var require = require('fs')
-var secPage = require ()
+var fs = require('fs')
+var secPage = require ("./utils/generateMarkdown")
 
 
 // TODO: Create an array of questions for user input
-const questions = ['What would you like the title to be?','Please provide a description of the project', 'What is the table of contents structure?',"Any steps for installation?",'Provide instruction for usage','Do you need a liscense and if so what kind?','Contributers on project',];
-const answers= []
 // TODO: Create a function to write README file
-function writeToFile(fileName, data) {
-    for (let i = 0; i < questions.length; i++){
+function writeToFile() {
         inquirer.prompt([
             {
             type: 'input',
-            message:questions[i],
+            message:'What would you like the title to be?',
             name:'title',
             },
             {
             type:'input',
-            message:questions[i],
+            message:'Please provide a description of the project',
             name: 'description',
             },
             {
             type: 'input',
-            message: questions[i],
+            message: 'What is the table of contents structure?',
             name: 'tableofcontents'},
              {
                 type: 'input',
-                message: questions[i],
+                message: "Any steps for installation?",
                 name: 'install'
             },
             {
                 type: 'input',
-                message: questions[i],
+                message: 'Provide instruction for usage',
                 name: 'contributors',
 
             },
             {
-                type: 'input',
-                message: questions[i],
-                name: 'tests'
+                type: 'list',
+                message:"Select your license badge choice",
+                choices: ["MIT", "None", "Fancy"],
+                name: 'license'
             },
             {
                 type: 'input',
-                message: questions[i],
+                message: 'Contributers on project',
                 name: 'questions'
             }])
             
         .then( (response) =>{
-            console.log(response)
-            })
+            fs.writeFile('Readme.md', secPage(response), err => {
+                console.log(err)
+            }) })
 
     }
-}
 writeToFile();
-
-// TODO: Create a function to initialize app
-function init() {}
-
-// Function call to initialize app
-init();
