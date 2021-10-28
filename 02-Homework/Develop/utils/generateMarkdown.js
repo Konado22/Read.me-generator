@@ -40,7 +40,8 @@ function generateMarkdown(data) {
   return ` # ${data.title} ${renderLicenseBadge(data.license)}
    ## ${data.title}
   ${data.description}
-  ## Table of Contents 
+  ## Table of Contents /
+   ${data.tableofcontents}
   * [Installation](#installation)
    ## Installation 
    Install notes: ${data.install}
